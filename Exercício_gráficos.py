@@ -15,7 +15,7 @@ except FileNotFoundError:
         'Nota': [4.5, 3.8, 4.0, 4.2, 4.7, 4.1]
     })
 
-# Conversão e tratamento de nulos
+# Tratamento de nulos
 df_bruto['Qtd_Vendidos'] = pd.to_numeric(df_bruto['Qtd_Vendidos'], errors='coerce').fillna(0)
 df_bruto['Preço'] = pd.to_numeric(df_bruto['Preço'], errors='coerce').fillna(0)
 df_bruto['Nota'] = pd.to_numeric(df_bruto['Nota'], errors='coerce').fillna(0)
@@ -25,7 +25,7 @@ df = df_bruto.dropna(subset=['Temporada', 'Material']).copy()
 df['Temporada'] = df['Temporada'].str.strip().str.lower()
 df['Material'] = df['Material'].str.strip().str.lower()
 
-# --- UNIFICAÇÃO DE MATERIAIS ---
+# Unificação de materiais
 unificacao_material = {
     'jean': 'jeans',
     'brim 100% algodão': 'algodão',
@@ -34,7 +34,7 @@ unificacao_material = {
 }
 df['Material'] = df['Material'].replace(unificacao_material)
 
-# --- UNIFICAÇÃO DE TEMPORADAS ---
+# Unificação de temporadas
 unificacao_temp = {
     'primavera-verão - outono-inverno': 'mista (todas)',
     'primavera-verão outono-inverno': 'mista (todas)',
@@ -128,7 +128,7 @@ app.layout = html.Div([
         ], style={'width': '45%', 'display': 'inline-block'}),
     ], style={'padding': '30px', 'backgroundColor': '#1e1e26', 'borderRadius': '10px', 'margin': '20px'}),
 
-    # Grid de Gráficos
+    # Gráficos
     html.Div([
         html.Div([dcc.Graph(id='grafico-vendas')], style={'width': '50%', 'display': 'inline-block'}),
         html.Div([dcc.Graph(id='grafico-box-precos')], style={'width': '50%', 'display': 'inline-block'}),
